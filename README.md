@@ -1,10 +1,10 @@
-# MPCS 52553 - Final Project
+# TinyTable
 
 **Brief Summary**
 
 This is a web-based application for reserve restaurants.
 
-User can login/logout, make/cancel reservations, write/edit reviews, see their upcoming/past reservations, 
+User can login/logout, make/cancel reservations, write/edit reviews, see their upcoming/past reservations,
 view/edit profile and earn points.
 
 The project also has administrative functions,
@@ -37,9 +37,9 @@ password:000000
 
 * After sign up will automatically sign in
 * Only give review entry in past reservation to ensure user can only review a restaurant after a reservation
-* If user write review to this restaurant before, there will show a Edit Review button instead of Write Review, 
+* If user write review to this restaurant before, there will show a Edit Review button instead of Write Review,
 maintain one user only have one review to a given restaurant
-* Visitors can see a list of restaurants and show page of detail, 
+* Visitors can see a list of restaurants and show page of detail,
 after sign in a "Book Restaurant" button will appear at top right corner of `restaurant#show`
 * Login user can make a reservation by click it and input the time of your reservation
 * User can view his/her own profile page, it will show upcoming and past reservation.
@@ -50,26 +50,22 @@ after sign in a "Book Restaurant" button will appear at top right corner of `res
 * On detail page of restaurant, beside the review, administrator can also see the reservation of this restaurant
 * Administrator can access statistics page show business statistics
 * Visitors can sign up as a new user
-* Has validation and show warning for wrong input 
+* Has validation and show warning for wrong input
 
 
 **Implemented Validations**
 
 * Has validation for reservation time must in future(in `/app/model/reservation.rb`),
-comment out for test convenience(to add past reservation for testing review function) 
+comment out for test convenience(to add past reservation for testing review function)
 * User: name,password,email presence, password length in 6-20, email format
 * Restaurant: table_num is integer between 1-10
 * Review: score is integer between 0-5, user can only have one review for a given restaurant,
 if write a review before, can edit later.
-* Reservation: restaurant_id,user_id, time presence, reservation time between 11am - 10pm, can check time format, 
+* Reservation: restaurant_id,user_id, time presence, reservation time between 11am - 10pm, can check time format,
 if all tables are booked out at given time, can't make reservation any more.
 
 
 
 **Feature Elective**
-* Implement confirmation text by Twilio, since trial account,all text will sent to my own phone, you can see this in action `reservations#create` 
+* Implement confirmation text by Twilio, since trial account,all text will sent to my own phone, you can see this in action `reservations#create`
 * Show statistics with google chart API
-
-
-
-
