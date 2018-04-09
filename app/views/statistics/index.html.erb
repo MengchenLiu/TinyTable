@@ -1,0 +1,26 @@
+<% if @is_admin %>
+<h3>Statistics</h3>
+
+<div class="container-fluid">
+	<div class="col-sm-10">
+		<h4>Total number of users: <%=@u_num%></h4>
+		<h4>Total number of reservations: <%=@r_num%></h4><br>
+		<%=image_tag @chart1%><br><br>
+		<%=image_tag @chart2%><br><br>
+		<%=image_tag @chart3%>
+	</div>
+	
+	<div class="col-sm-2">
+		<h3>Top Users</h3>
+		<ol>
+			<%@top_users.each do |u|%>
+				<li><%=u.name%></li>
+			<%end%>
+		</ol>
+	</div>
+
+</div>
+
+<% else %>
+<h3>Only administrator can access this page</h3>	
+<% end %>

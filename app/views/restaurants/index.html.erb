@@ -1,0 +1,38 @@
+
+<% if @is_admin %>
+<p><%= link_to "Add a Restaurant", "/restaurants/new", class: "button" %></p>
+<% end %>
+
+  <table>
+    <thead>
+      <tr>
+		<% if @is_admin %>
+        <th></th>
+        <th></th>
+		<% end %>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Table Number</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @restaurants.each do |restaurant| %>
+
+        <tr>
+			<% if session["user_id"].present? %>
+			<% if User.find_by(id: session["user_id"]).is_admin %>
+			<td><%= link_to "Delete", "/restaurants/#{restaurant.id}", method: "delete" %>
+            <td><%= link_to "Edit", "/restaurants/#{restaurant.id}/edit" %>
+			<% end %>
+			<% end %>
+            <td>
+              <%= link_to "#{restaurant.name}", "/restaurants/#{restaurant.id}" %>
+			</td>
+			<td><%= restaurant.address %></td>
+            <td><%= restaurant.table_num %></td>
+        </tr>
+
+      <% end %>
+    </tbody>
+  </table>

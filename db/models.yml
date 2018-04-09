@@ -1,0 +1,52 @@
+User
+  name: string
+  password: string
+  point: integer(0)
+  email: string
+  phone_number: string
+  is_admin: boolean(false)
+
+
+Restaurant
+  name: string
+  address: text("")
+  table_num: integer
+  description: text("")
+  web_link: text("")
+  
+ 
+  
+Reservation
+  restaurant_id: integer
+  user_id: integer
+  time: datetime
+  size: integer
+
+Review
+  restaurant_id: integer
+  user_id: integer
+  content: text
+  score: integer
+
+
+
+
+
+
+# Example table for a typical Book model.
+#
+# Book
+#   title: string
+#   price: integer
+#   author: string
+#   summary: text
+#   hardcover: boolean
+#
+# Indent consistently!  Follow the above syntax exactly.
+# Typical column choices are: string, text, integer, boolean, date, and datetime.
+#
+# Default column values can be specified like this:
+#    price: integer(0)
+#    hardcover: boolean(false)
+#
+# Have fun!

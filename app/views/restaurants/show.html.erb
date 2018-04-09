@@ -1,0 +1,32 @@
+<% if @is_login %>
+<p class="pull-right">
+  <%= link_to "Book This restaurant", "/reservations/new?rest_id=#{@restaurant.id}" %>
+</p>
+<% end %>
+<h3>Restaurant</h3>
+<h3><%= @restaurant.name %></h3>
+
+
+<h3>Website:  <%= link_to "#{@restaurant.web_link}", "#{@restaurant.web_link}" %></h3>
+<p><strong>Number of Tables:</strong> <%= @restaurant.table_num %></p>
+
+<hr>
+
+<h3>Reviews</h3>
+
+<ol>
+  <% @restaurant.reviews.each do |review| %>
+	<li><%= review.content %>  Score:<%= review.score %>  From: <%=review.reviewer.name  %>  </li>
+  <% end %>
+</ol>
+
+<% if @is_admin %>
+<h3>Reservations</h3>
+
+<ol>
+  <% @restaurant.reservations.each do |reservation| %>
+	<li><%= reservation.customer.name %>(<%= reservation.time %>)</li>
+  <% end %>
+</ol>
+
+<% end %>

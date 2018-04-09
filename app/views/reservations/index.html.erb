@@ -1,0 +1,31 @@
+
+<% if @is_admin %>
+<h3>Reservations</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Restaurant</th>
+        <th>Customer</th>
+        <th>Time</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @reservations.each do |reservation| %>
+
+        <tr>
+            <td><%= link_to reservation.reserve_restaurant.name, "/restaurants/#{reservation.reserve_restaurant.id}" %></td>
+            <td>
+              <%= link_to reservation.customer.name, "/users/#{reservation.customer.id}" %>
+            </td>
+			<td><%= reservation.time%>
+        </tr>
+	
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+<h3>Only administrator can access this page</h3>	
+<% end %>

@@ -1,0 +1,33 @@
+<h3>Add Review</h3>
+<% if @review.errors.any? %>
+<div class="alert alert-dismissible alert-danger">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Oops! Something wrong happens...</strong> 
+
+<ul>
+  <% @review.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+</div>
+ <% end %>  
+<%= form_tag "/reviews" do %>
+
+    <%= hidden_field_tag "rest_id" , params["rest_id"] %>
+  <p>
+    <%= label_tag "content", "content" %>
+    <%= text_field_tag "content" %>
+  </p>  
+  <p>
+    <%= label_tag "score", "score" %>
+    <%= text_field_tag "score" %>
+  </p>  
+  <p>
+      <%= submit_tag "Submit Review", class: "button" %>
+
+      or
+
+      <%= link_to "Cancel", "/reviews" %>
+  </p>
+
+<% end %>

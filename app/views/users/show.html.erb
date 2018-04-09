@@ -1,0 +1,62 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#profile">Profile</a></li>
+				<li><a href="#points">Points</a></li>
+				<li><a href="#upcoming">Upcoming Reservations</a></li>
+				<li><a href="#past">Past Reservations</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-9">
+			<br><br><h2 id="profile">My Profile</h2><br><br>
+			<p>
+				<strong>Name:</strong> <%= @user.name %>
+			</p>
+			<p>
+				<strong>Email:</strong> <%= @user.email %>
+			</p>		
+			<p>
+				<strong>Phone:</strong> <%= @user.phone_number %>
+			</p>		
+			<p>
+				<%= link_to "Edit Profile", "/users/#{@user.id}/edit", class: "button" %>
+			</p>
+			<br><br><h2 id="points">Points: <%= @user.point %></h2><br><br>
+			<br><br><h2 id="upcoming">Upcoming Reservations</h2>  <br><br>
+			<div class="jumbotron">
+				<% r = Reservation.where(user_id:@user.id) %>  
+				<% r.each do |reservation| %>
+					<% if reservation.time >= Time.now.utc%>
+					<tr>
+					<td><%= link_to reservation.reserve_restaurant.name, "/restaurants/#{reservation.reserve_restaurant.id}" %></td>
+					<td><%= reservation.time%></td>
+					<td><%= link_to "Cancel", "/reservations/#{reservation.id}", method: "delete" %></td><br>	
+					</tr>
+					<% end %>
+				<% end %> 	
+			</div>
+
+			<br><br><h2 id="past">Past Reservations</h2>   <br><br>
+			<div class="jumbotron">
+			<% r = Reservation.where(user_id:@user.id) %>
+			<% r.each do |reservation| %>
+			<% if reservation.time < Time.now.utc%>
+			<tr>
+			<td><%= link_to reservation.reserve_restaurant.name, "/restaurants/#{reservation.reserve_restaurant.id}" %></td>
+			<td><%= reservation.time%></td>	
+			<%review = Review.find_by(user_id: session["user_id"],restaurant_id:reservation.reserve_restaurant.id)%>
+			<%if review.presence%>
+			<td><%= link_to "Edit Review", "/reviews/#{review.id}/edit" %></td><br>
+			<%else%>
+			<td><%= link_to "Write Review", "/reviews/new?rest_id=#{reservation.reserve_restaurant.id}" %></td><br>
+			<%end%>
+			</tr>
+			<% end %>
+			<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+

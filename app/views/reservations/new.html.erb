@@ -1,0 +1,35 @@
+<h3>Add Reservation</h3>
+
+<% if @reservation.errors.any? %>
+<div class="alert alert-dismissible alert-danger">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Oops! Something wrong happens...</strong> 
+<ul>
+  <% @reservation.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+</div>
+<% end %>
+
+<%= form_tag "/reservations" do %>
+<%= hidden_field_tag "rest_id" , params["rest_id"] %>
+
+  <p>
+    <%= label_tag "time", "Date_Time" %>
+    <%= text_field_tag "time", @reservation.time %>
+  </p>
+  
+  <%= label_tag "num", "Customer Number" %>
+  
+  <%=select_tag "num", raw("<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>")  %>
+
+
+  <p>
+	<button type="submit" class="btn btn-primary">Reserve!</button>
+	<button type="reset" class="btn btn-default">Cancel</button>
+  </p>
+
+
+
+<% end %>
